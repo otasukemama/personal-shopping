@@ -342,6 +342,15 @@
     .level{border-right:1px solid var(--line);}
     .contact-box{padding:28px;}
     .steps li{grid-template-columns:40px 1fr;}
+    nav{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      max-width:100%;
+      scrollbar-width:none;
+    }
+    nav::-webkit-scrollbar{display:none;}
+    nav button{white-space:nowrap; flex:0 0 auto;}
   }
 </style>
 </head>
