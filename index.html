@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura Bloom — Personal Shopping &amp; Japanese Lessons from Tokyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EFEDE6;
+    --paper-raised: #F7F5F0;
+    --ink: #21262B;
+    --ink-soft: #565C60;
+    --indigo: #33475B;
+    --indigo-deep: #223140;
+    --clay: #B4585F;
+    --gold: #A9843F;
+    --line: #D9D5C9;
+    --max: 760px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    color:var(--indigo-deep);
+    margin:0 0 0.4em 0;
+    line-height:1.15;
+  }
+  p{margin:0 0 1em 0; max-width:60ch;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+  .narrow{max-width:var(--max);}
+
+  :focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--paper);
+    z-index:20;
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:1.35rem;
+    letter-spacing:0.01em;
+    color:var(--indigo-deep);
+    text-decoration:none;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .brand .mark{
+    color:var(--clay);
+    font-size:1rem;
+  }
+  nav{display:flex; gap:6px; flex-wrap:wrap;}
+  nav button{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    background:none; border:none; cursor:pointer;
+    color:var(--ink-soft);
+    padding:8px 14px;
+    border-radius:3px;
+  }
+  nav button:hover{color:var(--indigo-deep);}
+  nav button[aria-current="page"]{
+    color:var(--indigo-deep);
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+  }
+
+  /* Page sections */
+  .page{display:none; animation:rise 0.35s ease;}
+  .page.active{display:block;}
+  @keyframes rise{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* Hero */
+  .hero{padding:76px 0 56px 0;}
+  .hero .eyebrow{
+    color:var(--clay);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    margin-bottom:14px;
+  }
+  .hero h1{font-size:2.6rem; max-width:14ch;}
+  .hero .lede{font-size:1.15rem; color:var(--ink-soft); max-width:52ch; margin-top:16px;}
+  .hero-actions{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+  .btn{
+    display:inline-block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.98rem;
+    font-weight:500;
+    text-decoration:none;
+    padding:13px 24px;
+    border-radius:3px;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--indigo-deep); color:var(--paper);}
+  .btn-primary:hover{background:var(--indigo);}
+  .btn-ghost{background:transparent; color:var(--indigo-deep); border-color:var(--indigo-deep);}
+  .btn-ghost:hover{background:var(--paper-raised);}
+
+  /* Intro split */
+  .split{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px;
+    padding:36px 0 64px 0;
+    border-top:1px solid var(--line);
+  }
+  .service-card h3{font-size:1.4rem;}
+  .service-card .tag{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--clay);
+    font-size:0.95rem;
+    display:block;
+    margin-bottom:10px;
+  }
+  .service-card p{color:var(--ink-soft);}
+  .service-card .btn{margin-top:8px;}
+
+  /* Trust strip */
+  .trust{
+    border-top:1px solid var(--line);
+    padding:56px 0;
+  }
+  .trust blockquote{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem;
+    color:var(--indigo-deep);
+    max-width:44ch;
+    margin:0 0 16px 0;
+    line-height:1.4;
+  }
+  .trust cite{
+    font-style:normal;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+
+  /* Steps */
+  .steps{
+    list-style:none; margin:0; padding:0;
+    border-top:1px solid var(--line);
+  }
+  .steps li{
+    display:grid; grid-template-columns:56px 1fr;
+    gap:20px;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .steps .num{
+    font-family:'Fraunces', serif;
+    font-size:1.6rem;
+    color:var(--clay);
+  }
+  .steps h3{font-size:1.15rem; margin-bottom:6px;}
+  .steps p{color:var(--ink-soft); margin:0;}
+
+  /* Pricing block */
+  .pricing{
+    border-top:1px solid var(--line);
+    padding:48px 0;
+  }
+  .pricing-row{
+    display:flex; justify-content:space-between; gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .pricing-row .label{font-weight:500; color:var(--indigo-deep);}
+  .pricing-row .desc{color:var(--ink-soft); font-size:0.95rem; max-width:46ch;}
+  .pricing-note{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    margin-top:20px;
+    font-style:italic;
+  }
+
+  /* Shipping restrictions note */
+  .ship-note{
+    border-top:1px solid var(--line);
+    padding:40px 0 56px 0;
+  }
+  .ship-note ul{
+    margin:14px 0 14px 0;
+    padding-left:20px;
+    color:var(--ink-soft);
+  }
+  .ship-note li{margin-bottom:6px;}
+  .ship-note .fine{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  /* Live shopping callout */
+  .live-shopping{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:44px 0;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:32px;
+    align-items:center;
+  }
+  .live-shopping .tag{
+    font-family:'Fraunces', serif; font-style:italic;
+    color:var(--clay); display:block; margin-bottom:8px;
+  }
+  .live-shopping h3{font-size:1.35rem;}
+  .live-shopping p{color:var(--ink-soft); margin-bottom:0;}
+  .live-shopping .price-box{
+    text-align:right;
+    white-space:nowrap;
+  }
+  .live-shopping .price{
+    font-family:'Fraunces', serif;
+    font-size:1.9rem;
+    color:var(--indigo-deep);
+    display:block;
+  }
+  .live-shopping .price-note{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  @media (max-width:720px){
+    .live-shopping{grid-template-columns:1fr;}
+    .live-shopping .price-box{text-align:left;}
+  }
+
+  /* Mini photo banners, placed individually through the page */
+  .mini-photo{
+    aspect-ratio:21/6;
+    border:1px dashed var(--line);
+    border-radius:2px;
+    display:flex; align-items:flex-end;
+    padding:16px 20px;
+    position:relative;
+    overflow:hidden;
+    margin:8px 0 40px 0;
+  }
+  .mini-photo::before{
+    content:"";
+    position:absolute; inset:0;
+    opacity:0.55;
+  }
+  .mini-photo.electronics::before{background:linear-gradient(160deg, #cdd7de, #33475b 130%);}
+  .mini-photo.stationery::before{background:linear-gradient(160deg, #f0e6cf, #a9843f 130%);}
+  .mini-photo.goods::before{background:linear-gradient(160deg, #f0d3d6, #b4585f 130%);}
+  .mini-photo .cap{
+    position:relative; z-index:1;
+    font-size:0.85rem;
+    color:#fff;
+    background:rgba(33,38,43,0.55);
+    padding:6px 10px;
+    border-radius:2px;
+    line-height:1.35;
+  }
+  @media (max-width:720px){
+    .mini-photo{aspect-ratio:16/9;}
+  }
+
+  /* Levels (lessons page) */
+  .levels{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .level{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:28px 24px;
+  }
+  .level .tag{
+    font-family:'Fraunces', serif; font-style:italic;
+    color:var(--clay); display:block; margin-bottom:8px;
+  }
+  .level p{color:var(--ink-soft); font-size:0.96rem; margin:0;}
+
+  .format-row{
+    display:flex; gap:40px; flex-wrap:wrap;
+    padding:44px 0;
+    border-top:1px solid var(--line);
+  }
+  .format-item{flex:1; min-width:220px;}
+  .format-item h3{font-size:1.05rem; margin-bottom:6px;}
+  .format-item p{color:var(--ink-soft); font-size:0.96rem;}
+
+  /* Contact page */
+  .contact-box{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    padding:44px;
+    margin-top:24px;
+  }
+  .contact-box p{color:var(--ink-soft);}
+  .contact-detail{
+    display:flex; gap:10px; margin-top:6px; font-size:0.95rem; color:var(--ink-soft);
+  }
+
+  section.block{padding:8px 0;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0 60px 0;
+    color:var(--ink-soft);
+    font-size:0.9rem;
+  }
+  footer .foot-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+
+  @media (max-width: 720px){
+    .hero h1{font-size:2rem;}
+    .split{grid-template-columns:1fr; gap:36px;}
+    .levels{grid-template-columns:1fr;}
+    .level{border-right:1px solid var(--line);}
+    .contact-box{padding:28px;}
+    .steps li{grid-template-columns:40px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#" class="brand" onclick="showPage('home');return false;">
+      <span class="mark">✿</span> Sakura Bloom
+    </a>
+    <nav>
+      <button onclick="showPage('home')" data-nav="home">Home</button>
+      <button onclick="showPage('shopping')" data-nav="shopping">Personal Shopping</button>
+      <button onclick="showPage('lessons')" data-nav="lessons">Japanese Lessons</button>
+      <button onclick="showPage('contact')" data-nav="contact">Contact</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HOME -->
+  <section id="page-home" class="page active">
+    <div class="hero">
+      <span class="eyebrow">Based in Tokyo, working for you abroad</span>
+      <h1>A trusted hand in Japan, for the things only Japan can give you.</h1>
+      <p class="lede">Sakura Bloom helps people outside Japan get their hands on Japanese products they can't buy from home, and learn the language at a pace that actually fits their life — both handled personally, by someone who lives here.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary" onclick="showPage('shopping');return false;">Explore Personal Shopping</a>
+        <a href="#" class="btn btn-ghost" onclick="showPage('lessons');return false;">Explore Japanese Lessons</a>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="service-card">
+        <span class="tag">Personal Shopping</span>
+        <h3>Buy it in Japan, receive it at home.</h3>
+        <p>From a shop that doesn't ship overseas, a sold-out release, or something you simply can't find abroad — tell us what you're after and we'll buy it and send it to you.</p>
+        <a href="#" class="btn btn-ghost" onclick="showPage('shopping');return false;">See how it works</a>
+      </div>
+      <div class="service-card">
+        <span class="tag">Japanese Lessons</span>
+        <h3>Learn at your level, over Zoom.</h3>
+        <p>One-to-one lessons for beginners through advanced learners, built around what you actually want to say and understand — not a fixed textbook pace.</p>
+        <a href="#" class="btn btn-ghost" onclick="showPage('lessons');return false;">See lesson levels</a>
+      </div>
+    </div>
+
+    <div class="trust">
+      <blockquote>“I wanted this to feel like asking a friend in Tokyo for a favour — not filing a request with a company.”</blockquote>
+      <cite>— Sana, founder of Sakura Bloom</cite>
+      <p style="margin-top:22px; max-width:56ch; color:var(--ink-soft);">Sakura Bloom is run personally by Sana, based in Tokyo — with occasional help from her husband on busier requests. You're always dealing with people who actually live here, not a faceless company. [Add a line or two here about your background/experience if you'd like.]</p>
+    </div>
+  </section>
+
+  <!-- PERSONAL SHOPPING -->
+  <section id="page-shopping" class="page">
+    <div class="hero">
+      <span class="eyebrow">Personal Shopping</span>
+      <h1>If it's sold in Japan, we can probably get it to you.</h1>
+      <p class="lede">Japan-only cosmetics, limited releases, department store finds, something spotted on a trip — send us the details and we'll handle the rest, from purchase to packing.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary" onclick="showPage('contact');return false;">Request a quote</a>
+      </div>
+    </div>
+
+    <!--
+      Replace each .photo-placeholder / .mini-photo div below with a real <img> tag once you have photos, e.g.:
+      <img src="akihabara.jpg" alt="Akihabara electronics street" style="width:100%;height:100%;object-fit:cover;">
+      Use your own photos or properly licensed stock photography — avoid photos that
+      clearly show copyrighted characters/branded packaging to keep this safe for commercial use.
+    -->
+    <div class="mini-photo electronics"><span class="cap">Akihabara street, electronics &amp; hobby shops</span></div>
+
+    <section class="block">
+      <h2 style="font-size:1.5rem; margin-top:12px;">How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="num">1</span>
+          <div>
+            <h3>Tell us what you want</h3>
+            <p>Send us the details in writing — a link, a photo, or a description. The more detail you can give us, the better (exact model, size, color, store — whatever you know).</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div>
+            <h3>We check it can reach you</h3>
+            <p>Some items can't be shipped to every country. We confirm this before anything else, so you're not quoted for something that can't actually be sent.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div>
+            <h3>We confirm the price</h3>
+            <p>You'll get the item price, our fee, and shipping worked out before anything is charged, so there are no surprises.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <div>
+            <h3>You pay, we buy</h3>
+            <p>Pay securely by credit card through Stripe. Once payment is in, we purchase the item and send you a quick confirmation with photos or a receipt.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <div>
+            <h3>It ships to you</h3>
+            <p>Carefully packed and sent to your address, with tracking passed along the moment it's out the door.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <div class="mini-photo stationery"><span class="cap">Japanese stationery &amp; paper goods</span></div>
+
+    <div class="live-shopping">
+      <div>
+        <span class="tag">Not sure exactly what you want?</span>
+        <h3>Try Live Shopping</h3>
+        <p>We video-call you from inside the shop, show you what's on the shelf, and help you decide in real time — great for browsing a category rather than buying one specific thing.</p>
+        <p style="margin-top:12px; font-size:0.92rem;">If the price ends up higher than expected once we're at the shop, we'll send you a secure payment link on the spot — you approve and pay before we buy anything, right there on the call.</p>
+        <p style="margin-top:8px; font-size:0.92rem;">We'll send you a Zoom link ahead of time — please join from somewhere with a stable internet connection so the video doesn't cut out.</p>
+      </div>
+      <div class="price-box">
+        <span class="price">¥13,000</span>
+        <span class="price-note">(approx. $81 at ¥160/$1)<br>per session, up to 60 minutes<br>(extensions billed by the 15 min)</span>
+        <span class="price-note" style="display:block; margin-top:10px;">Item price, travel costs, and shipping are charged separately.</span>
+      </div>
+    </div>
+
+    <div class="mini-photo goods"><span class="cap">Gacha, figures &amp; collectibles</span></div>
+
+    <div class="pricing">
+      <h2 style="font-size:1.5rem;">Pricing</h2>
+      <div class="pricing-row">
+        <div class="label">Online purchases</div>
+        <div class="desc">¥2,000 flat for items up to ¥20,000. Above that, 10% of the item price.</div>
+      </div>
+      <div class="pricing-row">
+        <div class="label">In-store purchases</div>
+        <div class="desc">¥5,000 flat for items up to ¥50,000 (covers the shop visit). Above that, 10% of the item price.</div>
+      </div>
+      <div class="pricing-row">
+        <div class="label">Shipping</div>
+        <div class="desc">Charged at cost, based on the size and weight of your order.</div>
+      </div>
+      <p class="pricing-note">Exact pricing is confirmed with you before any payment is taken — every request gets a quote first.</p>
+      <p class="pricing-note">All payments are made securely by credit card through Stripe. You can pay in your own currency — the charge is simply converted automatically.</p>
+    </div>
+
+    <div class="ship-note">
+      <h2 style="font-size:1.5rem;">A few things we can't ship</h2>
+      <p style="color:var(--ink-soft);">International shipping rules are stricter than most people expect. Common examples that usually can't be sent overseas:</p>
+      <ul>
+        <li>Spare lithium batteries or power banks (batteries built into a device are often fine)</li>
+        <li>Spray cans, perfume, nail polish, and other flammable liquids</li>
+        <li>Fireworks and anything explosive</li>
+        <li>Alcohol (sometimes possible, with restrictions)</li>
+        <li>High-value precious metals or jewelry</li>
+        <li>Fresh food and perishables</li>
+      </ul>
+      <p class="fine">The exact rules depend on the item and your country, so we'll flag anything that looks like a problem when we send your quote — before you pay for anything.</p>
+    </div>
+  </section>
+
+  <!-- JAPANESE LESSONS -->
+  <section id="page-lessons" class="page">
+    <div class="hero">
+      <span class="eyebrow">Japanese Lessons</span>
+      <h1>Lessons built around you, not a textbook.</h1>
+      <p class="lede">One-to-one, over Zoom, taught almost entirely in Japanese — the way you'd pick up a language by living it, not by memorizing rules about it.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary" onclick="showPage('contact');return false;">Get started</a>
+      </div>
+    </div>
+
+    <section class="block">
+      <h2 style="font-size:1.5rem; margin-top:12px;">How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="num">1</span>
+          <div>
+            <h3>A written check-in, in your own language</h3>
+            <p>Before your first lesson, tell us as much as you can about your goals and current level — in whatever language is easiest for you. The more detail, the better we can prepare.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div>
+            <h3>A plan shaped around that</h3>
+            <p>Want to get by comfortably on a trip? Speak more fluently? Just build up conversation practice and get comfortable talking? Based on your goal, we'll suggest materials and an approach, and settle on a direction together before your first lesson.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div>
+            <h3>Adjusted as you go</h3>
+            <p>As your Japanese improves (or your goals change), the lessons change with you.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <div class="format-row">
+      <div class="format-item">
+        <h3>Format</h3>
+        <p>Live, one-to-one lessons over Zoom — no groups, no fixed textbook pace.</p>
+      </div>
+      <div class="format-item">
+        <h3>Taught in Japanese</h3>
+        <p>We speak Japanese only — it's the best way to actually improve. If you ever get stuck, English or a translation tool is completely fine. The goal is to enjoy the lesson while you learn.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="page-contact" class="page">
+    <div class="hero" style="padding-bottom:0;">
+      <span class="eyebrow">Contact</span>
+      <h1>Tell us what you need.</h1>
+      <p class="lede">Whether it's a product you're after or a lesson you'd like to try, the fastest way to reach us is the form below.</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Get in touch</h3>
+      <p>Fill in the short form and we'll reply with next steps — usually within a day or two.</p>
+      <a href="https://forms.google.com/REPLACE-WITH-YOUR-FORM-LINK" class="btn btn-primary" target="_blank" rel="noopener">Open the contact form</a>
+      <div class="contact-detail">Prefer to talk it through first? Mention that on the form and we'll set up a Zoom call.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>Sakura Bloom · Tokyo, Japan</div>
+    <div>Personal Shopping &amp; Japanese Lessons</div>
+  </div>
+</footer>
+
+<script>
+  function showPage(name){
+    document.querySelectorAll('.page').forEach(function(el){
+      el.classList.remove('active');
+    });
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('nav button').forEach(function(btn){
+      if(btn.getAttribute('data-nav') === name){
+        btn.setAttribute('aria-current', 'page');
+      } else {
+        btn.removeAttribute('aria-current');
+      }
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  showPage('home');
+</script>
+
+</body>
+</html>
