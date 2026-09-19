@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Sakura Bloom | Personal Shopping &amp; Japanese Lessons from Tokyo</title>
+<meta name="description" content="Product spotlights and anime trivia from Tokyo — stories behind the things Sakura Bloom ships to fans abroad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EFEDE6; --paper-raised: #F7F5F0; --ink: #21262B; --ink-soft: #565C60;
+    --indigo: #33475B; --indigo-deep: #223140; --clay: #B4585F; --gold: #A9843F;
+    --line: #D9D5C9; --max: 760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; color:var(--indigo-deep); margin:0 0 0.4em 0; line-height:1.15;}
+  p{margin:0 0 1em 0; max-width:60ch;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+
+  header{border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--paper); z-index:20;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:20px 0; flex-wrap:wrap; gap:14px;}
+  .brand{font-family:'Fraunces', serif; font-size:1.35rem; color:var(--indigo-deep); text-decoration:none; display:flex; align-items:baseline; gap:8px;}
+  .brand .mark{color:var(--clay); font-size:1rem;}
+  nav{display:flex; gap:6px; flex-wrap:wrap;}
+  nav a{font-family:'IBM Plex Sans', sans-serif; font-size:0.95rem; text-decoration:none; color:var(--ink-soft); padding:8px 14px; border-radius:3px;}
+  nav a:hover{color:var(--indigo-deep);}
+  nav a[aria-current="page"]{color:var(--indigo-deep); background:var(--paper-raised); border:1px solid var(--line);}
+
+  .hero{padding:76px 0 48px 0;}
+  .hero .eyebrow{color:var(--clay); font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem; margin-bottom:14px;}
+  .hero h1{font-size:2.6rem; max-width:14ch;}
+  .hero .lede{font-size:1.15rem; color:var(--ink-soft); max-width:56ch; margin-top:16px;}
+
+  .post-list{border-top:1px solid var(--line);}
+  .post-card{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; padding:32px 0; border-bottom:1px solid var(--line);}
+  .post-card .tag{font-family:'Fraunces', serif; font-style:italic; color:var(--clay); font-size:0.9rem; display:block; margin-bottom:8px;}
+  .post-card h2{font-size:1.4rem;}
+  .post-card p{color:var(--ink-soft); margin-bottom:0;}
+  .post-card .meta{font-size:0.85rem; color:var(--ink-soft); margin-top:10px;}
+  .post-card .btn{white-space:nowrap; margin-top:4px;}
+  .post-card.disabled{opacity:0.55;}
+  .post-card.disabled h2{color:var(--ink-soft);}
+
+  .btn{display:inline-block; font-family:'IBM Plex Sans', sans-serif; font-size:0.95rem; font-weight:500; text-decoration:none; padding:11px 20px; border-radius:3px; border:1px solid var(--indigo-deep); color:var(--indigo-deep);}
+  .btn:hover{background:var(--paper-raised);}
+
+  footer{border-top:1px solid var(--line); padding:40px 0 60px 0; color:var(--ink-soft); font-size:0.9rem;}
+  footer .foot-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+
+  @media (max-width:720px){
+    .hero h1{font-size:2rem;}
+    .post-card{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="../index.html" class="brand"><span class="mark">✿</span> Sakura Bloom</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html">Personal Shopping</a>
+      <a href="../index.html">Japanese Lessons</a>
+      <a href="index.html" aria-current="page">Blog</a>
+      <a href="../index.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <span class="eyebrow">From Tokyo, for fans everywhere</span>
+    <h1>The Sakura Bloom Blog</h1>
+    <p class="lede">Product spotlights from Japanese shops and shelves, plus the odd bit of anime trivia — the stories behind the things we help you find.</p>
+  </div>
+
+  <div class="post-list">
+
+    <div class="post-card">
+      <div>
+        <span class="tag">Product Spotlight</span>
+        <h2>The Mechanical Pencil Japanese Students Are Obsessed With</h2>
+        <p>Why the Uni Kuru Toga quietly became a cult favorite — and how to get one shipped to you.</p>
+        <div class="meta">September 2026</div>
+      </div>
+      <a href="article-01.html" class="btn">Read more</a>
+    </div>
+
+    <div class="post-card disabled">
+      <div>
+        <span class="tag">Anime Trivia</span>
+        <h2>Coming soon</h2>
+        <p>Next up: why anime characters are always eating rice balls on the move.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>Sakura Bloom · Tokyo, Japan · <a href="mailto:sakurabloom.shopping@gmail.com">sakurabloom.shopping@gmail.com</a></div>
+    <div><a href="../index.html">← Back to Sakura Bloom</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
