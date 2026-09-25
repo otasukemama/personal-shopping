@@ -35,6 +35,7 @@
   .hero .eyebrow{color:var(--clay); font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem; margin-bottom:14px;}
   .hero h1{font-size:2.6rem; max-width:14ch;}
   .hero .lede{font-size:1.15rem; color:var(--ink-soft); max-width:56ch; margin-top:16px;}
+   
 
   .post-list{border-top:1px solid var(--line);}
   .post-card{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; padding:32px 0; border-bottom:1px solid var(--line);}
@@ -60,7 +61,10 @@
   .group-heading h2{font-size:1.3rem; margin-bottom:4px;}
   .group-heading p{color:var(--ink-soft); font-size:0.92rem; margin-bottom:0;}
   .post-list .group-heading:first-child{margin-top:32px;}
- 
+   .corner-nav{display:flex; gap:8px; flex-wrap:wrap; margin:28px 0 8px;}
+  .corner-nav a{font-family:'IBM Plex Sans', sans-serif; font-size:0.88rem; text-decoration:none; color:var(--indigo-deep); border:1px solid var(--line); background:var(--paper-raised); padding:7px 16px; border-radius:20px;}
+  .corner-nav a:hover{background:var(--line);}
+  .group-heading{scroll-margin-top:90px;}
 </style>
 </head>
 <body>
@@ -84,10 +88,15 @@
     <h1>The Sakura Bloom Blog</h1>
     <p class="lede">Product spotlights from Japanese shops and shelves, plus the odd bit of anime trivia — the stories behind the things we help you find.</p>
   </div>
+    <div class="corner-nav">
+    <a href="#stationery">✎ Stationery</a>
+    <a href="#figures">✦ Figures &amp; Collectibles</a>
+    <a href="#trivia">◆ Anime Trivia</a>
+  </div>
 
   <div class="post-list">
 
-    <div class="group-heading">
+         <div class="group-heading" id="stationery">
       <h2>Stationery</h2>
       <p>Small everyday things from Japan that turn out to have a story.</p>
     </div>
@@ -142,7 +151,7 @@
       <a href="article-05.html" class="btn">Read more</a>
     </div>
 
-    <div class="group-heading">
+          <div class="group-heading" id="figures">
       <h2>Figures &amp; Collectibles</h2>
       <p>What's worth knowing before you start collecting.</p>
     </div>
@@ -155,7 +164,7 @@
       </div>
     </div>
 
-    <div class="group-heading">
+         <div class="group-heading" id="trivia">
       <h2>Anime Trivia</h2>
       <p>Fun facts and backstory from our resident anime expert.</p>
     </div>
